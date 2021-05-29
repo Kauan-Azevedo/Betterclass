@@ -211,7 +211,6 @@ body {
 }
 
 .nav-link:hover {
-    filter: grayscale(0%) opacity(1);
     width: 100%;
     font: bold;
 }
@@ -483,11 +482,6 @@ a {
     outline: none;
 }
 
-.fadeIn.second:hover,
-.fadeIn.second:focus {
-    transition: all 0.4s;
-}
-
 .fadeIn.third {
     -webkit-animation-delay: 0.6s;
     -moz-animation-delay: 0.6s;
@@ -506,11 +500,6 @@ a {
     border: 2px solid var(--body-bg-color);
     border-radius: 5px;
     outline: none;
-}
-
-.fadeIn.third:hover,
-.fadeIn.third:focus {
-    transition: all 0.4s;
 }
 
 /* ESTILO DO LOGIN */
@@ -707,7 +696,6 @@ input[type=submit]:active {
 /* INPUTS */
 .form-control {
     background-color: var(--body-bg-color);
-    ;
     border: none;
     color: #0d0d0d;
     padding-left: 20px;
@@ -735,12 +723,6 @@ input[type=submit]:active {
 
 .select-semana {
     margin-top: 3rem;
-}
-
-/* ANIMAÇÃO INPUTS */
-.form-control:hover {
-    transition: all 0.4s;
-    background-color: var(--container-columns-2);
 }
 
 .form-control::placeholder {
