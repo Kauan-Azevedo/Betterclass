@@ -1,0 +1,43 @@
+<form th:action="@{/sala/save}" th:object="${sala}" method="POST">
+    <h1 class="tituloModal">editar sala</h1>
+    <label class="lbledit-h">Código</label>
+    <input class="form-control-h" type="text" th:field="${sala.id}" required>
+
+    <label class="lbledit1">Nome da reunião</label>
+    <input class="form-control" type="text" th:field="${sala.titulo}" required>
+
+    <label class="lbledit">Local área da reunião</label>
+    <input class="form-control" type="text" th:field="${sala.local}" required>
+
+    <label class="lbledit">Descrição da reunião</label>
+    <input class="form-control" type="text" th:field="${sala.descricao}" required>
+
+    <label class="lbledit">Dia da semana</label>
+    <select class="form-control" th:field="${sala.semana}" required>
+
+        <option value="Segunda-feira">Segunda-feira</option>
+        <option value="Terça-feira">Terça-feira</option>
+        <option value="Quarta-feira">Quarta-feira</option>
+        <option value="Quinta-feira">Quinta-feira</option>
+        <option value="Sexta-feira">Sexta-feira</option>
+        <option value="Sábado">Sábado</option>
+
+    </select>
+
+    <label class="lbledit">Horário de treino</label>
+    <input type="text" class="form-control" th:field="*{hora}" autocomplete="off">
+
+
+    <label class="lbledit">Limite de pessoas</label>
+    <input class="form-control" type="number" th:field="${sala.limite}" min="1" max="50" required
+           autocomplete="off">
+
+    <button class="btn btn-width btn-add-hora-cancelar" type="button"
+            onclick="window.location.href='../sala/list'">
+        <i class="fa fa-ban" aria-hidden="true"></i> Voltar
+    </button>
+    <button class="btn btn-width  btn-add-hora-salvar" type="submit">
+        <i class="fa fa-save" aria-hidden="true"></i> Editar
+    </button>
+
+</form>
