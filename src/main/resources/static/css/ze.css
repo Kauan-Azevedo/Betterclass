@@ -99,16 +99,18 @@
 /*PERFIL*/
 
 body {
-  background-color: var(--bg-sala-list);
+  background-color: var(--body-bg-color);
+  overflow-x: hidden;
 }
 
 .form-perfil {
-  background-color: var(--container-list);
+  background-color: var(--bg-sala-list);
+  border-radius: 7px;
 }
 
 #inputs,
 #input-cpf {
-  background-color: var(--pesquisa) !important;
+  background-color: var(--body-bg-color) !important;
   color: var(--sala-nome);
 }
 
@@ -117,17 +119,17 @@ body {
 }
 
 ul.form.form-sala {
-  background-color: var(--container-list) !important;
+  background-color: var(--bg-sala-list) !important;
 }
 
 .list-group-item,
 .form-group-usuario-view {
-  background-color: var(--container-list) !important;
+  background-color: var(--bg-sala-list) !important;
 
 }
 
 .profile-header {
-  background-color: var(--container-list) !important;
+  background-color: var(--bg-sala-list) !important;
 }
 
 /*PERFIL FIM*/
@@ -143,6 +145,10 @@ ul.form.form-sala {
 .cds-options-sala:active {
   color: var(--sala-nome);
 }
+small.form-text{
+  color: var(--sala-nome) !important;
+
+} 
 
 /*MODO ESCURO FIM */
 
