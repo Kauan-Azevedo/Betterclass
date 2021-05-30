@@ -565,7 +565,12 @@ input:checked+.slider:before {
     margin: 5px;
     border: none;
 }
-
+.modal-header{
+    border-bottom: none !important;
+}
+.modal-footer{
+    border-top: none !important;
+}
 /* --- CAETANO --- */
 /* VIEW */
 .modal-content {
