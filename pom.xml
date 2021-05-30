@@ -47,21 +47,21 @@
 		</dependency>
 		
 		
-		<!-- DEPENDÊNCIA DO MYSQL -->
+		<!-- DEPENDÊNCIA DO MYSQL 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+-->
 
-
-		<!-- DEPENDÊNCIA DO pSQL
+		<!-- DEPENDÊNCIA DO pSQL-->
 		<dependency>
 		   <groupId>org.postgresql</groupId>
 		   <artifactId>postgresql</artifactId>
 		   <scope>runtime</scope>
 		</dependency> 
--->
+
 
 <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager
 <dependency>
