@@ -65,8 +65,8 @@
             <form th:action="@{/usuario/save}" th:object="${usuario}" method="POST" class="form-perfil">
 
                 <div class="profile-img">
-                    <img th:if="${nullFoto == true}" th:src="@{/img/null.jpg}" width="100px" height="100px" />
-                    <img th:if="${nullFoto == false}" th:src="'data:image/jpeg;base64,' + ${fotoBase64}" width="100px" height="100px" />
+                    <img th:if="${usuario.getFoto() == null}" th:src="@{/img/null.jpg}" width="100px" height="100px" />
+                    <img th:if="${usuario.getFoto() != null && usuario.getFoto().length > 0}" th:src="'data:image/jpeg;base64,' + ${fotoBase64}" width="100px" height="100px" />
                 </div>
 
                 <div class="form" hidden>

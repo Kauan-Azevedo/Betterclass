@@ -48,4 +48,4 @@ O projeto BetterClass conta com a contribuição dos seguintes membros:
 
 - <span style="background: #4b0082;border-radius: 99px;padding: 7px">**👨‍💻 Backend & Tester - José**</span>
 
-- <span style="background: #8f00ff;border-radius: 99px;padding: 7px">**👨‍💻 Frontend - Vinicius**</span>
+- <span style="background: #8f00ff;border-radius: 99px;padding: 7px">**👨‍💻 Frontend - Vinicius**</span>-
