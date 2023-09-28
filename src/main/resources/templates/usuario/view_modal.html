@@ -1,0 +1,37 @@
+<div class="container container-modal-list-usuario">
+
+    <div class="profile-header">
+
+        <form th:action="@{/usuario/save}" th:object="${usuario}" method="POST">
+
+            <div class="profile-img">
+                <img class="img-view" th:if="${nullFoto}" th:src="@{/img/null.jpg}" width="100px" height="100px" />
+                <img class="img-view" th:unless="${nullFoto}" th:src="@{${usuario.fotoImagePath}}" width="100px"
+                    height="100px" />
+            </div>
+
+            <div class="form">
+                <label class="lbl-view-modal">Nome:</label>
+                <input id="input-modal-view" type="text" th:field="${usuario.nome}" readonly>
+            </div>
+
+            <div class="form">
+                <label class="lbl-view-modal">CPF:</label>
+                <input id="input-modal-view" type="text" th:field="${usuario.cpf}" readonly>
+            </div>
+
+            <div class="form">
+                <label class="lbl-view-modal">E-mail:</label>
+                <input id="input-modal-view1" type="text" th:field="${usuario.email}" readonly>
+            </div>
+
+            <div class="form">
+                <ul class="ul-list-usu">
+                    <li class="list-group-item form-group-usuario-view">Salas</li>
+                    <li class="list-group-item form-group-usuario-view-li" th:each="sala : ${usuario.getSalas()}"
+                        th:text="${sala.titulo + ' ' + sala.semana + ' ' + sala.hora}"></li>
+                </ul>
+            </div>
+        </form>
+
+    </div>

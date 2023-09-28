@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Login</title>
+
+    <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/caetano.css}">
+    <link rel="stylesheet" th:href="@{/fontAwesome/css/all.min.css}">
+    <link rel="icon" th:href="@{/img/logo.png}">
+    <!-- <link rel="stylesheet" href="../static/css/caetano.css"> -->
+
+</head>
+
+<body class="light-mode">
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="logo">
+                <a th:href="@{/}" class="nav-link">
+                    <span class="link-text logo-text">Betterclass</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/}" class="nav-link">
+                    <img class="icon" src="../img/home.svg" alt="">
+                    <span class="link-text">Home</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/usuario/list}" class="nav-link">
+                    <img class="icon icon-usuarios" src="../img/usuarios.svg" alt="">
+                    <span class="link-text">Usuários</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/usuario/viewUser}" class="nav-link">
+                    <img class="icon" src="../img/perfil.svg" alt="">
+                    <span class="link-text">Perfil</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/sala/list}" class="nav-link">
+                    <img class="icon" src="../img/salas.svg" alt="">
+                    <span class="link-text">Salas</span>
+                </a>
+            </li>
+
+            <li class="nav-item theme-switch-wrapper" id="themeButton">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-2">
+        <div class="texto">
+            <h1 class="h111"><strong>bem-vindo de volta!<br>estavamos com saudade.</strong></h1>
+        </div>
+        <div class="subtexto">
+            <p>Lorem Ipsum tem sido o texto fictício<br> padrão da indústria desde quando um impressor<br>
+                desconhecido
+                pegou um modelo de impressão</p>
+        </div>
+
+        <div class="wrapper">
+            <div id="formBox">
+                <h1 class="txtLogin">Log In</h1>
+
+                <!-- Login Form -->
+
+                <form id="form1" th:action="@{/login}" method="post">
+
+                    <div th:if="${param.error}" class="alert alert-danger" id="modalErro">
+                        <h4>Atenção!</h4>
+                        <span>Preencha corretamente o usuario e senha</span>
+                    </div>
+
+                    <div><label class="lb1"> Usuário <input id="login" class="fadeIn second" type="text" name="username"
+                                placeholder="Digite seu login" autocomplete="off" /> </label></div>
+                    <div><label class="lb1"> Senha <input type="password" id="password" class="fadeIn third"
+                                name="password" placeholder="Digite sua senha" autocomplete="off" /> </label></div>
+                    <div id="formFooter">Não é cadastrado?
+                        <a class="underlineHover" onclick="window.location.href='/usuario/add'">Cadastre-se</a>
+                    </div>
+                    <div><input type="submit" class="fadeIn fourth" value="Login" /></div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <!--JAVASCRIPT-->
+
+    <script th:src="@{/bootstrap-5.0.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+    <script>
+        function hideModal() {
+            document.getElementById("modalErro").style.display = "none";
+        }
+
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {}
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+    </script>
+
+</body>
+
+</html>

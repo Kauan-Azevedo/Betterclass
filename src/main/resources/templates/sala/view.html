@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+    <!--CSS-->
+    <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/fontAwesome/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/ze.css}">
+    <title>betterclass</title>
+
+</head>
+
+<body>
+    <!-- NAVBAR -->
+
+    <div class="container">
+        
+        <div class="profile-header">
+			
+				<div class="profile-img">
+					<img th:src="@{${usuario.get().fotoImagePath}}" width="100px" height="100px"/>
+				</div>
+							
+            	<form th:action="@{/usuario/save}" th:object="${usuario}" method="POST">
+            	
+
+               	<!--   <label>CÃ³digo</label> 
+                <input class="form-control form-control-usuario-view" type="number" th:field="${usuario.id}" readonly>
+                -->
+				<div class="form">
+                	<label>Nome:</label>
+                	<input id="inputs" type="text" th:field="${usuario.nome}" readonly>
+                	
+                    
+                    
+                    
+				</div>
+	
+				<div class="form">
+                	<label>CPF:</label>
+                	<input id="input-cpf" type="text" th:field="${usuario.cpf}" readonly>
+				</div>
+				
+				<div class="form">
+                	<label>E-mail:</label>
+                	<input id="inputs" type="text" th:field="${usuario.email}" readonly>
+				</div>
+
+				<div class="form">
+               	 	<label>Senha:</label>
+                	<input id="inputs" type="text" th:field="${usuario.senha}" readonly>
+                </div>
+             
+
+                <ul class="form">
+                	<li class="list-group-item form-group-usuario-view">Hórarios</li>
+                	<li class="list-group-item form-group-usuario-view-li" th:each="sala : ${usuario.get().getSalas()}" th:text="${sala}"></li>
+                </ul>
+				
+        </form>
+
+    </div>
+
+    </div>
+
+    <!--JAVASCRIPT-->
+    <script th:src="@{/js/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/bootstrap-5.0.0/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+
+</body>
+
+</html>

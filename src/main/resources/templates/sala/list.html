@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Salas</title>
+
+    <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/kauan.css}">
+    <link rel="stylesheet" th:href="@{/fontAwesome/css/all.min.css}">
+    <link rel="icon" th:href="@{/img/logo.png}">
+</head>
+
+<body class="light-mode">
+<nav class="navbar">
+    <ul class="navbar-nav">
+        <li class="logo">
+            <a th:href="@{/}" class="nav-link">
+                <span class="link-text logo-text">Betterclass</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a th:href="@{/}" class="nav-link">
+                <img class="icon" src="../img/home.svg" alt="">
+                <span class="link-text">Home</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a th:href="@{/usuario/list}" class="nav-link">
+                <img class="icon icon-usuarios" src="../img/usuarios.svg" alt="">
+                <span class="link-text">Usuários</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a th:href="@{/usuario/viewUser}" class="nav-link">
+                <img class="icon" src="../img/perfil.svg" alt="">
+                <span class="link-text">Perfil</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a th:href="@{/sala/list}" class="nav-link">
+                <img class="icon" src="../img/salas.svg" alt="">
+                <span class="link-text">Salas</span>
+            </a>
+        </li>
+
+        <li class="nav-item theme-switch-wrapper" id="themeButton">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox"/>
+                <div class="slider round"></div>
+            </label>
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="container-salas">
+        <div class="salas-head">
+            <h4 class="salas-nome">Inspiration</h4>
+            <div class="btn-group">
+                <button class="btn-sair" onclick="window.location.href='/';">sair</button>
+                <button class="btn-convidar">convidar</button>
+                <button class="btn-novo" onclick="window.location.href='/sala/add';">novo</button>
+            </div>
+            <!--Barra de pesquis  #D8D8D8-->
+            <div class="input-group rounded-lg">
+                <input id="pesquisa" placeholder="Filtrar Salas"/>
+            </div>
+            <br>
+            <div id="myBtnContainer">
+                <button class="btn btn-filtro btn-all" onclick="location.href='/sala/list'">Todos</button>
+                <button class="btn btn-filtro btn-segunda" id="btn-segunda" value="segunda"
+                        onclick="segunda()">Segunda
+                </button>
+                <button class="btn btn-filtro btn-terca" id="btn-terca" value="terça"
+                        onclick="terca()">Terca
+                </button>
+                <button class="btn btn-filtro btn-quarta" id="btn-quarta" value="quarta"
+                        onclick="quarta()">Quarta
+                </button>
+                <button class="btn btn-filtro btn-quinta" id="btn-quinta" value="quinta"
+                        onclick="quinta()">Quinta
+                </button>
+                <button class="btn btn-filtro btn-sexta" id="btn-sexta" value="sexta"
+                        onclick="sexta()">Sexta
+                </button>
+                <button class="btn btn-filtro btn-sabado" id="btn-sabado" value="sábado"
+                        onclick="sabado()">Sabado
+                </button>
+            </div>
+        </div>
+        <div class="salas-card">
+
+            <div class="row">
+                <div class="card-sala-filtro col col-16 col-sm-6 mt-2" th:each="sala : ${sala}">
+
+                    <div class="card-sala">
+                        <div class="card-title link-view" th:text="${sala.titulo}"
+                             th:href="@{'/sala/view/' + ${sala.id} + '/' + ${true}}"></div>
+                        <div class="card-body" th:text="${sala.descricao}"></div>
+                        <div id="card-body card-body-semana" th:text="${sala.semana}" hidden></div>
+                        <div class="card-bottom">
+                            <i class="fa fa-trash link-delete" th:onclick="|showModalDeletar(${sala.id})|"></i>
+                            <i class="fas fa-edit link-edit" th:href="@{'/sala/edit/' + ${sala.id}}"></i>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col col-12 col-sm-6 mt-2">
+                    <a th:href="@{/sala/add}">
+                        <div class="rounded-lg text-center">
+                            <div class="card-body card-body-nova-sala">Nova Sala</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal view -->
+<div id="modalView" class="modal fade" role="dialog" th:each="sala : ${sala}">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal deletar -->
+<div id="modalDeletar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Atenção!</h4>
+                <h4 type="button" class="close" data-dismiss="modal"
+                        onclick="window.location.href='../sala/list'">&times;
+                </h4>
+
+            </div>
+            <div class="modal-body">
+                <p class="cor-texto-modal-tela-list-usuario">Você deseja realmente deletar esta Sala?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <input type="number" id="id_deletar" readonly hidden>
+
+                <button type="button" class="btn btn-secondary text-white" data-dismiss="modal"
+                        onclick="window.location.href='../sala/list'">
+                    <i class="fa fa-ban"></i> Cancelar
+                </button>
+                <button type="button" class="btn btn-danger text-white" th:onclick="deletar('sala')">
+                    <i class="fa fa-trash"></i> Deletar
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<script th:src="@{/bootstrap-5.0.0/js/bootstrap.min.js}"></script>
+<script>
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+</script>
+</body>
+
+</html>

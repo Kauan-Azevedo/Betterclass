@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Usuários</title>
+
+    <link rel="stylesheet" th:href="@{/bootstrap-5.0.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/caetano.css}">
+    <link rel="stylesheet" th:href="@{/fontAwesome/css/all.min.css}">
+    <link rel="icon" th:href="@{/img/logo.png}">
+</head>
+
+<body class="light-mode">
+
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="logo">
+                <a th:href="@{/}" class="nav-link">
+                    <span class="link-text logo-text">Betterclass</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/}" class="nav-link">
+                    <img class="icon" src="../img/home.svg" alt="">
+                    <span class="link-text">Home</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/usuario/list}" class="nav-link">
+                    <img class="icon icon-usuarios" src="../img/usuarios.svg" alt="">
+                    <span class="link-text">Usuários</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/usuario/viewUser}" class="nav-link">
+                    <img class="icon" src="../img/perfil.svg" alt="">
+                    <span class="link-text">Perfil</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a th:href="@{/sala/list}" class="nav-link">
+                    <img class="icon" src="../img/salas.svg" alt="">
+                    <span class="link-text">Salas</span>
+                </a>
+            </li>
+
+            <li class="nav-item theme-switch-wrapper" id="themeButton">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider round"></div>
+                </label>
+            </li>
+        </ul>
+    </nav>
+
+
+    <div class="container-usuario-list">
+
+        <div class="boxList">
+            <table class="table">
+                <thead class="thead-tela-list-usuario">
+
+                    <tr class="tr-head-tela-list-usuario">
+                        <th class="nomeList col">Nome</th>
+                        <th class="cpfList col">CPF</th>
+                        <th class="emailList col">Email</th>
+                        <th class="loginList col">Login</th>
+                        <th colspan="4" class="btn-add-sala-list">
+                            <div class="addList col">
+                                <a th:href="@{/usuario/add}" class="btnAdd">
+                                    adicionar <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody-tela-list-usuario">
+                    <div class="addList col">
+                        <a th:href="@{/usuario/add}" class="btnAdd-R">
+                            adicionar <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.nome}" class="nomeList1" data-label="Nome"></td>
+                        <td th:text="${usuario.cpf}" class="cpfList1" data-label="Cpf"></td>
+                        <td th:text="${usuario.email}" class="emailList1" data-label="Email"></td>
+                        <td th:text="${usuario.login}" class="loginList1" data-label="Login"></td>
+                        <td class="tabela-controle">
+                            <a>
+                                <button type="button" th:href="@{'/usuario/view/' + ${usuario.id} + '/' + ${false}}"
+                                    class="link-view-user btn btn-outline-info opcoes-tela-list-usuario btn-group">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                            </a>
+                        </td>
+                        <td class="tabela-controle opcoes-tela-list-usuario">
+                            <a th:href="@{'/usuario/edit/' + ${usuario.id}}">
+                                <button type="button" class="btn btn-outline-info btn-group"
+                                    th:onclick="@{'/usuario/edit/' + ${usuario.id}}">
+                                    <i class="fas fa-user-edit"></i>
+                                </button>
+                            </a>
+                        </td>
+                        <td class="tabela-controle opcoes-tela-list-usuario">
+                            <button type="button" class="btn btn-outline-danger btn-group"
+                                th:onclick="|showModalDeletar(${usuario.id})|">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+
+                        <td class="tabela-controle1">
+                            <a th:href="@{'/usuario/view/' + ${usuario.id} + '/' + ${false}}"
+                                class="usuario-eye link-view-user">
+                                <i class="fa fa-eye"></i>
+                            </a>
+
+                            <a th:href="@{'/usuario/edit/' + ${usuario.id}}" class="usuario-edit">
+                                <i class="fas fa-user-edit"></i>
+                            </a>
+                            <a th:onclick="|showModalDeletar(${usuario.id})|" class="usuario-trash">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+    <!-- Modal view -->
+    <div id="modalViewUser" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div id="modalDeletar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Atenção!</h4>
+                    <h4 type="button" class="close" data-dismiss="modal" onclick="window.location.href='../sala/list'">
+                        &times;
+                    </h4>
+
+                </div>
+                <div class="modal-body">
+                    <p class="cor-texto-modal-tela-list-usuario">Você deseja realmente deletar o Usuário?</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="number" id="id_deletar" hidden>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='../usuario/list'">
+                        <i class="fa fa-ban"></i> Cancelar
+                    </button>
+                    <button type="button" class="btn btn-info" th:onclick="deletar('usuario')">
+                        <i class="fa fa-trash"></i> Deletar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/bootstrap-5.0.0/js/bootstrap.min.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $(".link-view-user").on("click", function (e) {
+                e.preventDefault();
+                $("#modalViewUser").modal("show").find(".modal-content").load($(this).attr("href"))
+            })
+        })
+
+
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+    </script>
+
+</body>
+
+</html>
